@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      margin: auto;
+      position: relative;
+      width: 960px;
+    }
+
+    .form-top {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+    .form-bottom {
+      position: absolute;
+      right: 10px;
+      top: 30px;
+    }
+    .node {
+      border: solid 1px white;
+      font: 10px sans-serif;
+      line-height: 12px;
+      overflow: hidden;
+      position: absolute;
+      text-indent: 2px;
+    }
+    </style>
+  </head>
+  <body>
+    <form class="form-top">
+      <label><input type="radio" name="heirarchy-mode" value="race" checked> Race </label>
+      <label><input type="radio" name="heirarchy-mode" value="age"> Age </label>
+      <label><input type="radio" name="heirarchy-mode" value="quarter"> Quarter </label>
+    </form>
+    <form class="form-bottom">
+      <label><input type="radio" name="value-mode" value="scd" checked> SCD and Covid19</label>
+      <label><input type="radio" name="value-mode" value="scd_underlying"> SCD Underlying</label>
+      <label><input type="radio" name="value-mode" value="scd_multi"> SCD Multi</label>
+    </form>
+    <script src="//d3js.org/d3.v4.min.js"></script>
+    <script src = "treemap.js"></script>
+  </body>
+</html>
