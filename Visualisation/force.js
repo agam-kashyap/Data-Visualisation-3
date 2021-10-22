@@ -2,6 +2,8 @@ var svg = d3.select("svg"),
     width = +svg.node().getBoundingClientRect().width,
     height = +svg.node().getBoundingClientRect().height;
 
+var g = svg.append("g")
+    .attr("class", "everything");
 // svg objects
 var link, node;
 // the data - an object with nodes and links
@@ -120,14 +122,14 @@ function color(d) {
 // generate the svg objects and force simulation
 function initializeDisplay() {
   // set the data and properties of link lines
-  link = svg.append("g")
+  link = g.append("g")
         .attr("class", "links")
         .selectAll("line")
         .data(graph.links)
         .enter().append("line");
 
   // set the data and properties of node circles
-  node = svg.append("g")
+  node = g.append("g")
         .attr("class", "nodes")
         .selectAll("circle")
         .data(graph.nodes)
@@ -141,14 +143,25 @@ function initializeDisplay() {
   // node tooltip
   node.append("title")
       .text(function(d) { return d.id; });
-  // visualize the graph
+  SetRadius();
   updateDisplay();
+
 }
+
+
+function SetRadius() {
+    var weight = 0;
+    node.each(function(d) {
+      var connections = link.filter(function(l) {return l.source == d.id || l.target == d.id});
+      d.weight = connections.size();
+    });
+  }
 
 // update the display based on the forces (but not positions)
 function updateDisplay() {
     node
-        .attr("r", forceProperties.collide.radius)
+        // .attr("r", forceProperties.collide.radius)
+        .attr("r", function(d) { return d.weight})
         .attr("stroke", forceProperties.charge.strength > 0 ? "blue" : "red")
         .attr("stroke-width", forceProperties.charge.enabled==false ? 0 : Math.abs(forceProperties.charge.strength)/15);
 
@@ -204,3 +217,13 @@ function updateAll() {
     updateForces();
     updateDisplay();
 }
+
+var zoom_handler = d3.zoom().on("zoom", zoom_actions);
+
+svg.call(zoom_handler)
+  .call(zoom_handler.transform, d3.zoomIdentity.translate(300, 300).scale(0.2));
+
+
+  function zoom_actions() {
+    g.attr("transform", d3.event.transform)
+  }
