@@ -19,11 +19,11 @@ d3.json("../Data/Sickle/AH_Sickle_Cell_Disease_Provisional_Death_Counts_2019-202
   if (error) throw error;
 
   var root = d3.hierarchy(data.race, (d) => d.children)
-    .sum((d) => d.scd+1); //Had to add 1 since the scd values are 0 for many
+    .sum((d) => d.scd); //Had to add 1 since the scd values are 0 for many
 
   const tree = treemap(root);
   
-  var value = (d) => {return d.scd+1}; 
+  var value = (d) => {return d.scd}; 
   var heir = "race";
 
   const node = div.datum(root).selectAll(".node")
@@ -35,7 +35,7 @@ d3.json("../Data/Sickle/AH_Sickle_Cell_Disease_Provisional_Death_Counts_2019-202
       .style("width", (d) => Math.max(0, d.x1 - d.x0 - 1) + "px")
       .style("height", (d) => Math.max(0, d.y1 - d.y0  - 1) + "px")
       .style("background", (d) => color(d.parent.data.name))
-      .text((d) => d.data.scd);
+      .text((d) => d.data.name);
 
   d3.selectAll(".form-top input").on("change", function change() {
     
@@ -65,21 +65,22 @@ d3.json("../Data/Sickle/AH_Sickle_Cell_Disease_Provisional_Death_Counts_2019-202
             .style("width", (d) => Math.max(0, d.x1 - d.x0 - 1) + "px")
             .style("height", (d) => Math.max(0, d.y1 - d.y0  - 1) + "px")
             .style("background", (d) => color(d.parent.data.name))
-            .text((d) => d.data.scd);
+            .text((d) => d.data.name);
   });
 
   d3.selectAll(".form-bottom input").on("change", function change(){
+    
     if(this.value === "scd")
     {
-        value = (d) => {return d.scd+1};
+        value = (d) => {return d.scd};
     }
     else if(this.value === "scd_underlying")
     {
-        value = (d) => {return d.scd_underlying+1};
+        value = (d) => {return d.scd_underlying};
     }
     else 
     {
-        value = (d) => {return d.scd_multi+1};
+        value = (d) => {return d.scd_multi};
     }
 
     if(heir === "race")
@@ -105,6 +106,6 @@ d3.json("../Data/Sickle/AH_Sickle_Cell_Disease_Provisional_Death_Counts_2019-202
             .style("width", (d) => Math.max(0, d.x1 - d.x0 - 1) + "px")
             .style("height", (d) => Math.max(0, d.y1 - d.y0  - 1) + "px")
             .style("background", (d) => color(d.parent.data.name))
-            .text((d) => d.data.scd);
+            .text((d) => d.data.name);
   });
 });
