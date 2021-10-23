@@ -44,5 +44,7 @@ fig.update_layout(coloraxis_colorbar=dict(
     # ticks="outside",
     tickvals=[0,1],
     ticktext=["No", "Yes"],
-))
+),
+title='Matrix Visualisation for Node-Link Diagram',
+width=1000)
 fig.show()
