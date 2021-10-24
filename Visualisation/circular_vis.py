@@ -2,7 +2,7 @@ from numpy import matrix
 import plotly.graph_objects as go
 import math
 
-filename = "./Data/bio-diseasome/bio-diseasome.mtx"
+filename = "../Data/bio-diseasome/bio-diseasome.mtx"
 file = open(filename, "r")
 comment_info = file.readline()
 print(comment_info)

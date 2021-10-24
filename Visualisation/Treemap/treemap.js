@@ -15,7 +15,7 @@ const div = d3.select("body").append("div")
     .style("top", margin.top + "px");
 
 
-d3.json("../Data/Sickle/AH_Sickle_Cell_Disease_Provisional_Death_Counts_2019-2021-race-modified.json", function(error, data) {
+d3.json("../../Data/Sickle/AH_Sickle_Cell_Disease_Provisional_Death_Counts_2019-2021-race-modified.json", function(error, data) {
   if (error) throw error;
 
   var root = d3.hierarchy(data.race, (d) => d.children)

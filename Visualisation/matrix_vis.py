@@ -1,7 +1,7 @@
 import plotly.graph_objects as go
 import plotly.express as px
 
-filename = "./Data/bio-diseasome/bio-diseasome-modified-matrix.csv"
+filename = "../Data/bio-diseasome/bio-diseasome-modified-matrix.csv"
 file = open(filename, "r")
 
 info = file.readline()
@@ -23,12 +23,6 @@ for i in range(516):
 X = [i+1 for i in range(516)]
 Y = [i+1 for i in range(516)]
 
-# fig = go.Figure(data=go.Heatmap(
-#                    z=data,
-#                    x=X,
-#                    y=Y,
-#                    colorscale = [[0.0, '#FFFFFF'], [1.0, '#FF0012']]))
-
 fig = px.imshow(data,
                 labels=dict(x="Start Node", y="End Node", color="Edge Connectivity"),
                 x=X,
@@ -38,10 +32,7 @@ fig = px.imshow(data,
                 zmax=1
                )
 fig.update_layout(coloraxis_colorbar=dict(
-    # thicknessmode="pixels", thickness=50,
     lenmode="pixels", len=200,
-    # yanchor="top", y=1,
-    # ticks="outside",
     tickvals=[0,1],
     ticktext=["No", "Yes"],
 ),

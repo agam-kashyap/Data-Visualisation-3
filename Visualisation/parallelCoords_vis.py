@@ -2,7 +2,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
 
-sickle_df = pd.read_csv("./Data/Sickle/AH_Sickle_Cell_Disease_Provisional_Death_Counts_2019-2021.csv")
+sickle_df = pd.read_csv("../Data/Sickle/AH_Sickle_Cell_Disease_Provisional_Death_Counts_2019-2021.csv")
 
 # Create dimensions
 race_dim = go.parcats.Dimension(
